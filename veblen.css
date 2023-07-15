@@ -1,0 +1,6 @@
+.supsub {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+    font-size: 80%;
+}
