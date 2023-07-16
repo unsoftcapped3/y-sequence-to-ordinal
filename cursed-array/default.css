@@ -1,0 +1,10 @@
+body, body *{
+   font-family: JetBrains Mono !important;
+   font-size: 12px;
+}
+sub {
+   font-size:9px;
+}
+sup {
+   font-size:9px;
+}
