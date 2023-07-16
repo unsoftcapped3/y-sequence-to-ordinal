@@ -4,7 +4,7 @@
     vertical-align: middle;
     font-size: 80%;
 }
-body, body *{
+html {
    font-family: JetBrains Mono !important;
    font-size: 12px;
 }
