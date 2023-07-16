@@ -2,3 +2,9 @@ body, body *{
    font-family: JetBrains Mono !important;
    font-size: 12px !important;
 }
+sub {
+   font-size:9px;
+}
+sup {
+   font-size:9px;
+}
