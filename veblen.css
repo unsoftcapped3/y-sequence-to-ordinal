@@ -4,3 +4,6 @@
     vertical-align: middle;
     font-size: 80%;
 }
+body, body *{
+   font-family: JetBrains Mono !important;
+}
