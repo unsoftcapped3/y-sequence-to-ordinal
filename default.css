@@ -1,10 +1,16 @@
-html,table {
+html {
    font-family: JetBrains Mono !important;
    font-size: 12px;
 }
-sub {
-   font-size:9px;
+.supsub {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: top;
+    margin-top: -.5em;
+    font-size: 80%;
+    padding-top: .05em;
 }
-sup {
-   font-size:9px;
+
+span {
+    padding-top: inherit;
 }
