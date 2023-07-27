@@ -988,7 +988,8 @@ function fs(st,n,nn=0){
 
 //fss(st,n,nn);
 
-if(st==bo){return 'c['.repeat(nn)+'c'+'!'.repeat(nn);}
+if(st==bo&&uncountablemode){return 'c['.repeat(nn)+'c'+'!'.repeat(nn);}
+else if(st==bo){return '['.repeat(nlevels)+'c['.repeat(nn)+'c'+'!'.repeat(nn)+'!'.repeat(nlevels);}
 
 function pre(a){let X=[];for(let i of a)i=='C'?X.push([X.pop(),X.pop()]):X.push(i);return X[0]}function post(a){return a.length<2?a:`${post(a[1])}${post(a[0])}C`}function Cargs(a){return[post(pre(a)[0]),post(pre(a)[1])]}function subterms(a){return a.length<2?[a]:[a].concat(subterms(post(pre(a)[0]))).concat(subterms(post(pre(a)[1])))}function builtBelow(a,b,n){if(!n)return a<b;let l=[a],i=0;while(!(i>=l.length)){let t=l[i];if(i++,!builtBelow(t,b,n-1)){if(t>a)return!1;t.length>1&&(l=l.concat(Cargs(t).reverse()))}}return!0}function fix(a){let b=0;for(let i=0;i<a.length;i++)if(b+=(-1)**(a[i]=='C'),b==0)return a.slice(0,i);return a+'C'.repeat(Math.max(b-1,0))}function sh(a,d){let x=0n,t=3n,r='';for(let i of a)x=x*t+BigInt('COZ'.indexOf(i));for(x+=d;x;)r='COZ'[x%t]+r,x/=t;return r}function std(a,n){if(a.length<2)return!0;let b=Cargs(a)[1],c=Cargs(a)[0];return!(!std(b,n)||!std(c,n)||b.length>1&&Cargs(b)[0]<c)&&builtBelow(c,a,n)}function expand(a,s,n){let u=fix(a),l=a.length-1,q=0,m=-1n,i=0;while(u[l]=='C')l--;for(let i=l+1;i<l+n+2;i++)for(q=sh(u.slice(0,i)+'C'.repeat(Math.max(i-u.length,0)),m);!std(fix(q),s);)u=fix(q),q=sh(q,m);return fix(q)}
 
@@ -5160,7 +5161,7 @@ window.onkeydown = function(e) {
 };
 
 let uncountablemode=1;
-let uncountablemodeinitnames=['Uncountable limit of ', 'Countable limit of '];
+let uncountablemodeinitnames=['Countable limit of ','Uncountable limit of '];
 let bo=uncountablemodeinitnames[uncountablemode],col='c',eo=0,efs=0,
 //exp=['expansion','recursive expansion','double recursive expansion','triple recursive expansion','quadruple recursive expansion','quintuple recursive expansion','sextuple recursive expansion','septuple recursive expansion','octuple recursive expansion','ninefold recursive expansion'];
 //exp[-1]='collapse',exp[-2]='view';
