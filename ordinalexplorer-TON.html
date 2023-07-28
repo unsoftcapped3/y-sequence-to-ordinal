@@ -1009,12 +1009,10 @@ function pre(a){let X=[];for(let i of a)i=='C'?X.push([X.pop(),X.pop()]):X.push(
   while(true){
     let m=expand(toprefix(st),nlevels,q);
     if(!arr.includes(m)){arr.push(m);}
-    console.log(arr);
     q++;
     if(arr.length+1>=nn+2){break;}
   }
   let a=arr.at(-1);
-  console.log(a);
   return fromprefix(a);
 }
 
@@ -1758,7 +1756,7 @@ else if(f==col){
    //maxx=bb(col,bb(f,bb(f,bb(f,''))));
    //maxx=bb(col,bb(f,bb(f,'')));
    //maxx=bb(col,bb(f,bb(f,f)));
-   maxx=bb(col,bb(f,col));
+   maxx=bb(col,nexteps(f));
    //ff=fs(ff,f);
    }
 else if(f==bb(col,col)){
@@ -1769,7 +1767,7 @@ else if(f==bb(col,col)){
    j=bb(floorOmega(beta,j),j);
    //maxx=bb(bb(col,col),bb(f,bb(f,'')));
    //maxx=bb(bb(col,col),bb(f,bb(f,f)));
-   maxx=bb(bb(col,col),bb(f,col));
+   maxx=bb(bb(col,col),nexteps(f));
    }
 /*else if(f==bb(col,col)){
    sy='L';
@@ -3754,7 +3752,7 @@ else if(c.id=='sugarbutton28'){
    xs.style.background='#f0fff0';
    }
 else if(c.id=='sugarbutton40'){
-   h='<small>Display Extended Buchholz\'s function</small>';
+   h='<small>Display Extended Buchholz\'s function (adapted </small>';
    xs.style.background='#f0fff0';
    }
 else if(c.id=='sugarbuttona19'){
@@ -5167,7 +5165,7 @@ let bo=uncountablemodeinitnames[uncountablemode],col='c',eo=0,efs=0,
 //exp[-1]='collapse',exp[-2]='view';
 exp=['Expand','Recursively expand','Recursively expand','Recursively expand','Recursively expand','Recursively expand','Recursively expand','Recursively expand','Recursively expand','Recursively expand'];
 exp[-1]='Collapse',exp[-2]='view';
-let count=1,vt=true,pairb=[],pairl=[],exb=[],di=5,fsl,fsn,fsp,lea,format=1,ps=[];
+let count=1,vt=true,pairb=[],pairl=[],exb=[],di=8,fsl,fsn,fsp,lea,format=1,ps=[];
 let countdifference,multicount;
 let far=[for0,for1,for2];
 let indentar=[indentmode0,indentmode1,indentmode2];
@@ -5196,7 +5194,7 @@ let spn=true;
 let subperiodpositionshift=0;
 let leastuncountable,leastepsilon,leastepsilonbb;
 let initlargeordinal=bo;
-let sugar=[1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,35,36,37,38,39,1,0];
+let sugar=[1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,35,36,37,38,39,0,0];
 let sugardefault=[[...sugar],[...sugar]];
 sugardefault[0][10]=0;
 let sugarbuttoncolor=['#d0e0ff','#fff080','#d0ffd0','#d0ffff','','','','','#ffff00','#d0ffff','#d0ffd0','#d0ffd0','#ffe0e0','#fff0e0','#d0ffd0','#d0ffd0','#d0ffd0','#d0ffd0','#d0ffd0','#ffd0ff','#ffd0ff','#d0e0ff','#d0e0ff','#c0ffff','#b0ffb0','#ffe0e0','#a0f0c0','#fff000','#fafa00','#f0f040','#f0f040','#f0f040','#f0f040','#c0ffff','#c0ffff',35,36,37,38,39,'#ffd000','#f0f040'];
