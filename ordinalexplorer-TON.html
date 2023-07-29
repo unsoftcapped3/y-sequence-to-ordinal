@@ -83,9 +83,9 @@ float:left;
 
 </style>
 <body style="font-family:Arial;white-space:pre;line-height:0;"
-><span onmousedown="return false" id="sidebar" style="line-height:2;position:absolute;right:0px;width:200px;padding-left:42px;padding-right:15px;top:0;bottom:0;overflow:auto;float:right;background:#f5fdff;line-height:1.5;overflow-y:overlay;"
+><span onmousedown="return false" id="sidebar" style="line-height:2;position:absolute;right:0px;width:225px;padding-left:42px;padding-right:15px;top:0;bottom:0;overflow:auto;float:right;background:#f5fdff;line-height:1.5;overflow-y:overlay;"
 hidden>
-<b style="font-size:16px;">Ordinal Explorer Online</b>
+<b style="font-size:16px;">TON ordinal explorer</b>
 <div id="reset" style="
 background:#ffffd0;
 margin-top:10px;
@@ -180,7 +180,7 @@ min-width:16px;
 min-height:16px;
 line-height:18px;
 ">:</div
-><div id="sugarbutton0" class="subu" style="
+><br><div id="sugarbutton0" class="subu" style="
 min-width:32px;
 ">sugar</div
 ><div class="subuc"><div class="subuleft" id="sugarbuttona1" style="
@@ -398,7 +398,50 @@ padding:3px 5px;
 font-size:16px;
 background:#d0ffd0;
 cursor:pointer;
-">∞</div><div hidden align="left" style="font-size:13px;padding:5px;"><i>Format of ordinals:</i>
+">∞</div>
+
+<div id="declev" style="
+clear:both;
+margin-top:7px;
+float:left;
+outline:1px solid #909090;
+border-radius:5px 0 0 5px;
+min-height:16px;
+line-height:16px;
+text-align:center;
+padding:3px 5px;
+font-size:20px;
+background:#ffffd0;
+opacity:0.4;
+cursor:default;
+">◅</div><div id="nlevelsl" style="
+float:left;
+margin-top:7px;
+outlinea:1px solid #909090;
+min-width:70px;
+max-width:70px;
+min-height:16px;
+margin-left:1px;
+padding:0 20px;
+font-size:11px;
+line-height:1;
+backgrounda:#ffffff;
+cursor:pointer;
+"></div><div id="inclev" style="
+float:left;
+margin-top:7px;
+outline:1px solid #909090;
+min-height:16px;
+line-height:16px;
+margin-left:1px;
+padding:3px 5px;
+font-size:20px;
+background:#d0ffd0;
+border-radius:0 5px 5px 0;
+cursor:pointer;
+">▻</div>
+
+<div hidden align="left" style="font-size:13px;padding:5px;"><i>Format of ordinals:</i>
 <table id="switchformat" border="3" cellpadding="3" style="background:#ffffff;border-spacing:0;">
 <tr style="font-size:12px;line-height:1.4;">
 <td id="for2">[[c]][[[c]][]]</td>
@@ -501,8 +544,8 @@ background:#d0ffd0;
 cursor:pointer;
 ">▻</div>
 
-<span style="font-size:11px">    last updated: 30 April 2023</span>
-  <a id="oldversionlink" style="font-size:11px" href="Ordinal Explorer (versions).htm">old versions and other projects</a>
+<span style="font-size:11px">    last updated: 29 July 2023</span>
+  <a id="oldversionlink" style="font-size:11px" href="solarzone1010.github.io">other projects</a>
 </span><span id="listc" style="
 float:left;
 line-height:2;
@@ -980,17 +1023,6 @@ if(c<leastuncountable)
 return st;
 }
 
-
-
-// get n-th element of fs of ordinal st
-
-function fs(st,n,nn=0){
-
-//fss(st,n,nn);
-
-if(st==bo&&uncountablemode){return 'c['.repeat(nn)+'c'+'!'.repeat(nn);}
-else if(st==bo){return '['.repeat(nlevels)+'c['.repeat(nn)+'c'+'!'.repeat(nn)+'!'.repeat(nlevels);}
-
 function pre(a){let X=[];for(let i of a)i=='C'?X.push([X.pop(),X.pop()]):X.push(i);return X[0]}function post(a){return a.length<2?a:`${post(a[1])}${post(a[0])}C`}function Cargs(a){return[post(pre(a)[0]),post(pre(a)[1])]}function subterms(a){return a.length<2?[a]:[a].concat(subterms(post(pre(a)[0]))).concat(subterms(post(pre(a)[1])))}function builtBelow(a,b,n){if(!n)return a<b;let l=[a],i=0;while(!(i>=l.length)){let t=l[i];if(i++,!builtBelow(t,b,n-1)){if(t>a)return!1;t.length>1&&(l=l.concat(Cargs(t).reverse()))}}return!0}function fix(a){let b=0;for(let i=0;i<a.length;i++)if(b+=(-1)**(a[i]=='C'),b==0)return a.slice(0,i);return a+'C'.repeat(Math.max(b-1,0))}function sh(a,d){let x=0n,t=3n,r='';for(let i of a)x=x*t+BigInt('COZ'.indexOf(i));for(x+=d;x;)r='COZ'[x%t]+r,x/=t;return r}function std(a,n){if(a.length<2)return!0;let b=Cargs(a)[1],c=Cargs(a)[0];return!(!std(b,n)||!std(c,n)||b.length>1&&Cargs(b)[0]<c)&&builtBelow(c,a,n)}function expand(a,s,n){let u=fix(a),l=a.length-1,q=0,m=-1n,i=0;while(u[l]=='C')l--;for(let i=l+1;i<l+n+2;i++)for(q=sh(u.slice(0,i)+'C'.repeat(Math.max(i-u.length,0)),m);!std(fix(q),s);)u=fix(q),q=sh(q,m);return fix(q)}
 
    
@@ -1004,6 +1036,16 @@ function pre(a){let X=[];for(let i of a)i=='C'?X.push([X.pop(),X.pop()]):X.push(
     if(st=='Z'){return'c';}
     return`${fromprefix(Cargs(st)[1])}[${fromprefix(Cargs(st)[0])}!`;
   }
+
+// get n-th element of fs of ordinal st
+
+function fs(st,n,nn=0){
+
+//fss(st,n,nn);
+
+if(st==bo&&uncountablemode){return 'c['.repeat(nn)+'c'+'!'.repeat(nn);}
+else if(st==bo){return '['.repeat(nlevels)+'c['.repeat(nn)+'c'+'!'.repeat(nn)+'!'.repeat(nlevels);}
+
   let arr=[];
   let q=0;
   while(true){
@@ -3820,6 +3862,17 @@ else if(c.id=='infdec'){
    h='Set <b>infinite</b> number of levels of decomposition into boosters';
    xs.style.background='#f0fff0';
    }
+
+else if(c.id=='declev'){
+   h='<div id="declev1"'+(nlevels?'':' style="font-style:italic"')+'><nobr id="decdec2"'+(nlevels?' style="font-weight:bold"':'')+'>Decrease</nobr> system number</div><i>use N key</i>';
+   if(nlevels) 
+      xs.style.background='#fffff0';
+   }
+else if(c.id=='inclev'){
+   h='<b>Increase</b> system number<br/><i>use M key</i>';
+   xs.style.background='#f0fff0';
+   }
+
 else if(c.id=='decdecbase'){
    h='<div id="decdecbase1"'+(sugar[6]?'':' style="font-style:italic"')+'><nobr id="decdecbase2"'+(sugar[6]?' style="font-weight:bold"':'')+'>Decrease</nobr> number of levels of decomposition into bases</div>';
    if(sugar[6]) 
@@ -4510,12 +4563,12 @@ else{
 vsidebar.onclick=function(e){
 if(sidebar.hidden){
    sidebar.hidden=false;
-   listc.style.right='240px';
+   listc.style.right='290px';
    listc.style.overflowY='overlay';
    //listc.style.marginRight='17px';
    list.style.minWidth='calc(100% - 121px)';
    vsidebars.style.right='257px';
-   counter.style.right='260px';
+   counter.style.right='310px';
    vsidebar.innerHTML='»';
    }
 else{
@@ -4589,6 +4642,19 @@ if(document.getElementById('decdecbase1')!=null)
    xs.style.background=b?'#fffff0':'#fff';
    decdecbase1.style['font-style']=b?'normal':'italic';
    decdecbase2.style['font-weight']=b?'bold':'normal'; 
+   }
+}
+
+function nlevelsupdate()
+{
+nlevelsl.innerHTML='system number: <br/>'+(nlevels);
+declev.style.opacity=nlevels?1:0.4;
+declev.style.cursor=nlevels?'pointer':'default';
+if(document.getElementById('declev1')!=null)
+   {
+   xs.style.background=b?'#fffff0':'#fff';
+   declev1.style['font-style']=b?'normal':'italic';
+   declev2.style['font-weight']=b?'bold':'normal'; 
    }
 }
 
@@ -4686,6 +4752,26 @@ if(di==1){
    //dis.style.background='#d0ffd0';
    }    
 }
+
+declev.onclick=function(e){
+if(nlevels>0)
+   {
+   nlevels--;
+   bolevels--;
+   formatting();
+   initlargeordinalupdate();
+   nlevelsupdate();
+   }   
+}
+
+inclev.onclick=function(e){
+nlevels++;
+bolevels++;
+formatting();
+initlargeordinalupdate();
+nlevelsupdate();
+}
+
 
 function resetlist(m=uncountablemode)
 {
@@ -5219,5 +5305,5 @@ decintoboostersl.innerHTML='decomposition<br/>into boosters: '+sugar[4];
 far[format].style.background='#d0ffd0';
 indentar[indentvisible?indentmode:2].style.background='#d0ffd0';
 fs(initlargeordinal,'',0);
-
+nlevelsupdate();
 </script></div></body></html>
