@@ -85,7 +85,7 @@ float:left;
 <body style="font-family:Arial;white-space:pre;line-height:0;"
 ><span onmousedown="return false" id="sidebar" style="line-height:2;position:absolute;right:0px;width:225px;padding-left:42px;padding-right:15px;top:0;bottom:0;overflow:auto;float:right;background:#f5fdff;line-height:1.5;overflow-y:overlay;"
 hidden>
-<b style="font-size:16px;">TON Ordinal Explorer</b>
+<b style="font-size:16px;">TON ordinal explorer</b>
 <div id="reset" style="
 background:#ffffd0;
 margin-top:10px;
@@ -211,12 +211,14 @@ line-height:9px;
 ">ω<sup style="font-size:9px;">p</sup>n</div
 ><div class="subu" id="sugarbutton10" style="
 min-width:25px;
-line-height:9px;
-">ε<sup style="font-size:9px;">p</sup>m</div
+line-height:13px;
+height:12px;
+">ε<sub style="font-size:9px;" line0>p</sub>m</div
 ><div class="subu" id="sugarbutton11" style="
 min-width:32px;
-line-height:9px;
-">ε<sup style="font-size:9px;">p</sup>(...)</div
+line-height:13px;
+height:12px;
+">ε<sub style="font-size:9px;">p</sub>(...)</div
 ><div class="subu" id="sugarbutton12" style="
 ">+</div
 ><div class="subu" id="sugarbutton13" style="
@@ -287,8 +289,8 @@ min-width:33px;
 line-height:14px;
 font-size:10px;
 ">@ {...}</div
-><div class="subu" id="sugarbutton34" style="
-">Ω</div
+><div class="subu" id="sugarbutton34" style=" line-height:12px
+">Ω<sub style="font-size:10px">x</sub></div
 ><div class="subu" id="sugarbutton33" style="
 ">ℵ</div
 ><div class="subuc"><div class="subuleft" id="sugarbuttona20" style="
@@ -297,9 +299,36 @@ min-width:14px;
 ><div class="suburight" id="sugarbuttonb20" style="
 min-width:25px;
 ">sub</div
-></div><div class="subu" id="sugarbutton40" style="
-">ψ</div
-><div id="decdec" style="
+></div>
+<div class="subu" id="sugarbutton40" style="
+">ψ</div>
+<!-- will do later
+<div class="subuc"><div class="subuleft" id="sugarbuttona47" style="
+min-width:25px;
+">β[X]</div
+><div class="suburight" id="sugarbuttonb47" style="
+min-width:37px;height:12px;
+">C(X,β)</div
+></div><div class="subu" id="sugarbutton43" style="
+line-height:13px;height=12px;">&epsilon;<sub style="font-size:8px">0</sub></div
+><div class="subu" id="sugarbutton44" style="
+">&Omega;</div
+><div class="subu" id="sugarbutton45" style="
+">Z</div
+><div class="subu" id="sugarbutton46" style="
+">X</div
+><div class="subuc"><div class="subuleft" id="sugarbuttona42" style="
+min-width:11px;
+">c</div
+><div class="suburight" id="sugarbuttonb42" style="
+min-width:20px;line-height:13px;height:12px;
+">Z<sub style="font-size:8px">n</sub></div
+></div>
+-->
+</div>
+
+
+<div id="decdec" style="
 clear:both;
 margin-top:7px;
 float:left;
@@ -1023,16 +1052,15 @@ if(c<leastuncountable)
 return st;
 }
 
-function pre(a){let X=[];for(let i of a)i=='C'?X.push([X.pop(),X.pop()]):X.push(i);return X[0]}function post(a){return a.length<2?a:`${post(a[1])}${post(a[0])}C`}function Cargs(a){return[post(pre(a)[0]),post(pre(a)[1])]}function subterms(a){return a.length<2?[a]:[a].concat(subterms(post(pre(a)[0]))).concat(subterms(post(pre(a)[1])))}function builtBelow(a,b,n){if(!n)return a<b;let l=[a],i=0;while(!(i>=l.length)){let t=l[i];if(i++,!builtBelow(t,b,n-1)){if(t>a)return!1;t.length>1&&(l=l.concat(Cargs(t).reverse()))}}return!0}function fix(a){let b=0;for(let i=0;i<a.length;i++)if(b+=(-1)**(a[i]=='C'),b==0)return a.slice(0,i);return a+'C'.repeat(Math.max(b-1,0))}function sh(a,d){let x=0n,t=3n,r='';for(let i of a)x=x*t+BigInt('COZ'.indexOf(i));for(x+=d;x;)r='COZ'[x%t]+r,x/=t;return r}function std(a,n){if(a.length<2)return!0;let b=Cargs(a)[1],c=Cargs(a)[0];return!(!std(b,n)||!std(c,n)||b.length>1&&Cargs(b)[0]<c)&&builtBelow(c,a,n)}function expand(a,s,n){let u=fix(a),l=a.length-1,q=0,m=-1n,i=0;while(u[l]=='C')l--;for(let i=l+1;i<l+n+2;i++)for(q=sh(u.slice(0,i)+'C'.repeat(Math.max(i-u.length,0)),m);!std(fix(q),s);)u=fix(q),q=sh(q,m);return fix(q)}
-
-   
+function pre(a){let X=[];for(let i of a)i=='C'?X.push([X.pop(),X.pop()]):X.push(i);return X[0]}function post(a){return a.length<2?a:`${post(a[1])}${post(a[0])}C`}function Cargs(a){return[post(pre(a)[0]),post(pre(a)[1])]}function subterms(a){return a.length<2?[a]:[a].concat(subterms(post(pre(a)[0]))).concat(subterms(post(pre(a)[1])))}function builtBelow(a,b,n){if(!n)return a<b;let l=[a],i=0;while(!(i>=l.length)){let t=l[i];if(i++,!builtBelow(t,b,n-1)){if(t>a)return!1;t.length>1&&(l=l.concat(Cargs(t).reverse()))}}return!0}function fix(a){let b=0;for(let i=0;i<a.length;i++)if(b+=(-1)**(a[i]=='C'),b==0)return a.slice(0,i);return a+'C'.repeat(Math.max(b-1,0))}function std(a,n){if(a.length<2)return!0;let b=Cargs(a)[1],c=Cargs(a)[0];return!(!std(b,n)||!std(c,n)||b.length>1&&Cargs(b)[0]<c)&&builtBelow(c,a,n)}
+  
   function toprefix(st){
     if(st==''){return'O';}
     if(st=='c'){return'Z';}
     return`${toprefix(base(st))}${toprefix(booster(st))}C`;
   }
   function fromprefix(st){
-    if(st=='O'){return'';}
+    if(st=='O'||st==''){return'';}
     if(st=='Z'){return'c';}
     return`${fromprefix(Cargs(st)[1])}[${fromprefix(Cargs(st)[0])}!`;
   }
@@ -1041,21 +1069,83 @@ function pre(a){let X=[];for(let i of a)i=='C'?X.push([X.pop(),X.pop()]):X.push(
 
 function fs(st,n,nn=0){
 
-//fss(st,n,nn);
+const Ccount_=x=>x.length-(x.match(/C/g)||[]).length*2-1;
+const Ccount=x=>x.length-(x.join('').match(/C/g)||[]).length*2-1;
+const addC_=x=>{return x.concat('C'.repeat(Ccount_(x)));}
+const addC=x=>{return x.join('').concat('C'.repeat(Ccount(x)));}
 
+function expand(st,n){
+  let x=[];
+  for(let i of st){x.push(i);}
+  let t=x.length-(x.join('').match(/C/g)||[]).length+n;
+  while(x.at(-1)=='C'){x.pop();}
+  let o=x.at(-1);
+  x.pop();
+  x.push(o=='Z'?'O':'C');
+  while(x.length-(x.join('').match(/C/g)||[]).length<t){
+    x.push('Z');
+    if(std(addC(x),nlevels)){continue;}
+    x.pop();
+    x.push('O');
+    if(std(addC(x),nlevels)){continue;}
+    x.pop();
+    x.push('C');
+  }
+  return addC(x);
+}
+
+function dc(a){
+  for(let i=a.length;i>0;i--){
+    let S=Array.from(Array(a.length-i).keys()).map(x=>a[x]==a[x+i]);
+    let j=null;
+    if(S.length<2*i){continue;}
+    if(S.slice(-i).every(x=>x)){
+      for(j=0;j<S.length-i+1;j++){if(S.slice(j,j+i).every(x=>x)){break;}}
+      for(let k=1;k<i;k++){
+        let T=Array.from(Array(a.length-k).keys()).map(x=>a[x]==a[x+k]);
+        if(T.slice(j).every(x=>x)){return[j,k];}
+      }
+    return[j,i];
+    }
+  }
+}
+
+function fc(c){
+  let b=[null,-1,-1];
+  for(let i=0;i<c.length;i++){
+    let d=c.slice(i).concat(c.slice(0,i));
+    let a=0,o=0;
+    for(let j=0;j<d.length;j++){
+      o+=d[j]==c;
+      a+=(d[j]==c)*j;
+    }
+    if(o>0){a/=o;}
+    if(a>b[2]){b=[d,i,a];}
+  }
+  return b[1];
+}
+
+//fss(st,n,nn);
+if(st==''){fsnumber=1;return'';}
+if(st.slice(-2)=='[!'){fsnumber=1;return st.slice(0,-2);}
 if(st==bo&&uncountablemode){return 'c['.repeat(nn)+'c'+'!'.repeat(nn);}
 else if(st==bo){return '['.repeat(nlevels)+'c['.repeat(nn)+'c'+'!'.repeat(nn)+'!'.repeat(nlevels);}
-
-  let arr=[];
-  let q=0;
-  while(true){
-    let m=expand(toprefix(st),nlevels,q);
-    if(!arr.includes(m)){arr.push(m);}
-    q++;
-    if(arr.length+1>=nn+2){break;}
-  }
-  let a=arr.at(-1);
-  return fromprefix(a);
+  let ex=expand(toprefix(st),toprefix(st).length+1);
+  while(ex.at(-1)=='C'){ex=ex.slice(0,-1);}
+  let ex2=[];
+  for(let i of ex){ex2.push(i);}
+  let id=dc(ex2)[0];
+  let le=dc(ex2)[1];
+  let fix=fc(ex2.slice(id,id+le));
+  ex2.concat(ex2.slice(id,id+fix));
+  id+=fix;
+  fsnumber=le;
+  let g=ex2.slice(0,id);
+  let b=ex2.slice(id,id+le);
+  subperiodpositionshift%=fsnumber
+  let primer=g.concat(b.slice(0,subperiodpositionshift)).join('');
+  let period=b.slice(subperiodpositionshift).concat(b.slice(0,subperiodpositionshift)).join('');
+  return fromprefix(addC_(primer.concat(period.repeat(nn+(primer=='')))));
 }
 
 
@@ -3794,7 +3884,7 @@ else if(c.id=='sugarbutton28'){
    xs.style.background='#f0fff0';
    }
 else if(c.id=='sugarbutton40'){
-   h='<small>Display Extended Buchholz\'s function (adapted </small>';
+   h='<small>Display Extended Buchholz\'s function (adapted to TON)</small>';
    xs.style.background='#f0fff0';
    }
 else if(c.id=='sugarbuttona19'){
@@ -3907,6 +3997,10 @@ else if(c.id=='decintobasesl'){
    h='<small><small><div style="line-height:1">Number of levels of decomposition into bases.</div></small></small>'; 
    xs.style.background='#fff';
    }
+else if(c.id=='nlevelsl'){
+   h='<small><small><div style="line-height:1">System number.</div></small></small>'; 
+   xs.style.background='#fff';
+   }
 else if(c.id=='dis'){
    h='<small><small><div style="line-height:1">Maximal number of fundamental sequence elements, displayed near mouse cursor.</div></small></small>'; 
    xs.style.background='#fff';
@@ -4009,7 +4103,8 @@ if(c.id=='mulmark'||c.id=='expmark'||c.id=='smexmark'||c.id=='colmark')
       if(eo1==-3)
       {
       //h+='</div><b>'+c.innerHTML+'</b><span'+(false?'':' id="fsd"')+(di>0?'':' hidden')+'> fundamental sequence:'; 
-      h+='</div><b>'+c.innerHTML+'</b><span'+(false?'':' id="fsd"')+(di>0?'':' hidden')+'><br/>'+'fs:'; 
+      h+='</div><b>'+c.innerHTML+'</b><span'+(false?'':' id="fsd"')+(di>0?'':' hidden')+'><br/>'+'fs: <small>(<span id="spps">'+(subperiodpositionshift+1)+'</span>/<span id="fsn">'+fsnumber+'</span>)'+(fsnumber>1?' <i>(use "←, "→", or "[", "]" keys)</i>':'')+'</small>'; 
+
 //      h+='<br/></div><b>'+c.innerHTML+'</b><span'+(false?'':' id="fsd"')+(di>0?'':' hidden')+'><br/></small>:'; 
       if(c.id=='')
          h+='<br>'+'   <i>empty</i>';
@@ -4039,7 +4134,9 @@ if(c.id=='mulmark'||c.id=='expmark'||c.id=='smexmark'||c.id=='colmark')
    }
 else
    lea='';
-xs.innerHTML=h;}
+xs.innerHTML=h;
+fselementsupdate();
+}
 xs.hidden=!vt||onli;
 mousetextupdate(mousex,mousey);  
 }}
@@ -4886,6 +4983,7 @@ if(fsp&&document.getElementById('fsd')!=null)
    {
    fs(fsl,'',0);
    document.getElementById('spps').innerHTML=subperiodpositionshift+1;
+   document.getElementById('fsn').innerHTML=fsnumber;
    for (let e=0;e<fsn;e++)
       document.getElementById('fselement'+e).innerHTML='   '+e+': '+convert(fs(fsl,'',e));
    }
@@ -5158,17 +5256,19 @@ else if(c=='ArrowDown'){
          mouseoverupdate();
       }
    }
-else if(c=='ArrowLeft'){
+else if(c=='ArrowLeft'||c=='BracketLeft'){ //my computer's right arrow key is broken so alternative options
    if(fsnumber>1)
       {
       fscurrent='';
       subperiodpositionshift--;
-      if(subperiodpositionshift<0)
+      if(subperiodpositionshift<0){
+         console.log(fsnumber);
          subperiodpositionshift=fsnumber-1;
+      }
       fselementsupdate();
       }
    }
-else if(c=='ArrowRight'){
+else if(c=='ArrowRight'||c=='BracketRight'){
    if(fsnumber>1)
       {
       fscurrent='';
@@ -5251,7 +5351,7 @@ let bo=uncountablemodeinitnames[uncountablemode],col='c',eo=0,efs=0,
 //exp[-1]='collapse',exp[-2]='view';
 exp=['Expand','Recursively expand','Recursively expand','Recursively expand','Recursively expand','Recursively expand','Recursively expand','Recursively expand','Recursively expand','Recursively expand'];
 exp[-1]='Collapse',exp[-2]='view';
-let count=1,vt=true,pairb=[],pairl=[],exb=[],di=8,fsl,fsn,fsp,lea,format=1,ps=[];
+let count=1,vt=true,pairb=[],pairl=[],exb=[],di=5,fsl,fsn,fsp,lea,format=1,ps=[];
 let countdifference,multicount;
 let far=[for0,for1,for2];
 let indentar=[indentmode0,indentmode1,indentmode2];
@@ -5280,7 +5380,7 @@ let spn=true;
 let subperiodpositionshift=0;
 let leastuncountable,leastepsilon,leastepsilonbb;
 let initlargeordinal=bo;
-let sugar=[1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,35,36,37,38,39,0,0];
+let sugar=[1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,35,36,37,38,39,0,0];
 let sugardefault=[[...sugar],[...sugar]];
 sugardefault[0][10]=0;
 let sugarbuttoncolor=['#d0e0ff','#fff080','#d0ffd0','#d0ffff','','','','','#ffff00','#d0ffff','#d0ffd0','#d0ffd0','#ffe0e0','#fff0e0','#d0ffd0','#d0ffd0','#d0ffd0','#d0ffd0','#d0ffd0','#ffd0ff','#ffd0ff','#d0e0ff','#d0e0ff','#c0ffff','#b0ffb0','#ffe0e0','#a0f0c0','#fff000','#fafa00','#f0f040','#f0f040','#f0f040','#f0f040','#c0ffff','#c0ffff',35,36,37,38,39,'#ffd000','#f0f040'];
