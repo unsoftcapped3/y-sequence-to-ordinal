@@ -51,9 +51,9 @@ function h(x){
   return [s2,e2]
 }
 function g(x){
-  for(i of [...t.split('').keys()]){spans(i).setAttribute('style','color:#000');}
   if(p){
     if(x<0){return;}
+    for(i of [...t.split('').keys()]){spans(i).setAttribute('style','color:#000');}
     spans(x).setAttribute('style','color:#f80')
     let s2=x-1;
     if(t[x]=='C'){
@@ -77,11 +77,11 @@ function g(x){
     }
     console.log(p)
     console.log(' ')
-    let col=['#0dd','#0bb','#088']
+    let col=['#0ee','#0aa','#077']
     //console.log(p,[...p.keys()].toReversed().slice(0,-1))
     for(i of [...p.keys()].toReversed().slice(0,-1)){for(j of [...Array(p[i]+1).keys()].slice(h(p[i])[1])){if(j>x||j<h(x)[1]){spans(j).setAttribute('style',`color:${col[i-1]}`);}}}
   }
 }
 
 document.getElementById('disp').onclick=f
-d.addEventListener('mouseover',(e)=>{id=e.target.tagName.toLowerCase()=='span'?Number(e.target.id):-1;g(id);});
+d.addEventListener('click',(e)=>{id=e.target.tagName.toLowerCase()=='span'?Number(e.target.id):-1;g(id);});
