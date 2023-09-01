@@ -12,7 +12,7 @@ function c(){
     else{Ac++;}
   }
   p=Ac-Cc==1;
-  if(!p){ee=((Cc>Ac)?'Too many':'Not enough')+' C\'s'}
+  if(!p){ee=((Ac-Cc<1)?'Too many':'Not enough')+' C\'s'}
   else{
     let c=0;
     for(i of [...t.split('').keys()]){
