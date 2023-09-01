@@ -21,10 +21,10 @@ function c(){
     }
   }
   if(p){
-    for(i of [...Array(t.length).keys()]){spans(i).setAttribute('style','color:#000');}
+    for(i of [...Array(t.length).keys()]){spans(i).setAttribute('style','font-size=16pt;color:#000');}
   }
   else{
-    for(i of [...Array(t.length).keys()]){spans(i).setAttribute('style','color:#888');}
+    for(i of [...Array(t.length).keys()]){spans(i).setAttribute('style','font-size=16pt;color:#888');}
   }
   document.getElementById('error').innerHTML=ee;
 }
@@ -83,5 +83,6 @@ function g(x){
   }
 }
 
-document.getElementById('disp').onclick=f
+document.getElementById('expr').addEventListener('keyup',(e)=>{if(e.code=='Enter'){f();}});
+document.getElementById('disp').addEventListener('click',(e)=>{f();});
 d.addEventListener('click',(e)=>{id=e.target.tagName.toLowerCase()=='span'?Number(e.target.id):-1;g(id);});
