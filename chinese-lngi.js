@@ -52,11 +52,11 @@ function chinese(x,prec=precision){
 
 function getNum(){
   if(exp.gt(limit)){return chinese(limit)}
-  return chinese(exp.floor()).split('<br>').map(x=>x+filler).join('<br>');
+  return chinese(exp.floor()).split('<br>').map(x=>x+filler).join('<br>').replaceAll('ㅤ','<span style="color: #000000">零</span>');
 }
 
 function dispNum(x){
-  if(exp.gt(limit)){return dispNum(limit);}
+  x=x.min(limit);
   return x.toString() // I give up. It's too slow otherwise.
 //  if(x.lt(1e7)){return x.toNumber().toLocaleString('en-US');}
 //  if(x.lt('e1e7')){return x.div(new Decimal(10).pow(x.log10().floor())).toNumber().toFixed(6)+` × 10<sup>${dispNum(x.log(10).floor())}</sup>`;}
