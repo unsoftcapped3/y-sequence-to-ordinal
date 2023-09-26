@@ -51,7 +51,7 @@ function chinese(x,prec=precision){
 }
 
 function getNum(){
-  if(exp.gt(limit)){return chinese(limit)}
+  if(exp.gt(limit)){return chinese(limit).split('<br>').map(x=>x+filler).join('<br>').replaceAll('ㅤ','<span style="color: #000000">零</span>');}
   return chinese(exp.floor()).split('<br>').map(x=>x+filler).join('<br>').replaceAll('ㅤ','<span style="color: #000000">零</span>');
 }
 
