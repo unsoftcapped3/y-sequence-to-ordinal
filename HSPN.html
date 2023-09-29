@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HSPN implementation</title>
+</head>
+<body>
+    <h1>HSPN</h1>
+
+        <textarea id="input" style="resize:vertical;width:calc(100% - 8px);height:80px;text-align:left;">
+fs w 5
+fs p(w) 5
+fs p(W) 5
+fs p(W+1) 5
+fs p(W+W) 5
+fs p(p(W_2+1)) 5
+fs p(p(W_2+w)) 5
+fs p(p(W_2+W)) 5
+fs p(p(W_2+p(W_2+w))) 5
+fs p(p(W_2+W_2)) 5
+fs p(p(W_2+W_2)+p(W_2+W_2)) 5
+fs p(p(W_2+W_2+1)) 5
+fs p(p(W_2+W_2+W)) 5
+fs p(p(W_2+W_2+p(W_2+W_2))) 5
+fs p(p(W_2+W_2+W_2)) 5
+fs p(p(p(W_3+1))) 5
+fs p(p(p(W_3+W))) 5
+fs p(p(p(W_3+W_2))) 5
+fs p(p(p(W_3+W_2))+p(p(W_3+W_2))) 5
+fs p(p(p(W_3+W_2)+W_2)) 5
+fs p(p(p(W_3+W_2)+p(W_3+W_2))) 5
+fs p(p(p(W_3+W_2+1))) 5
+fs p(p(p(W_3+W_2+W))) 5
+fs p(p(p(W_3+W_2+p(W_3+W_2)))) 5
+fs p(p(p(W_3+W_2+W_2))) 5
+fs p(p(p(W_3+p(W_3+1)))) 5
+fs p(p(p(W_3+p(W_3+W)))) 5
+fs p(p(p(W_3+p(W_3+p(W_3+W_2))))) 5
+fs p(p(p(W_3+p(W_3+W_2)))) 5
+fs p(p(p(W_3+p(W_3+W_2+1)))) 5
+fs p(p(p(W_3+p(W_3+W_2+W_2)))) 5
+fs p(p(p(W_3+p(W_3+p(W_3+1))))) 5
+fs p(p(p(W_3+p(W_3+p(W_3+W_2))))) 5
+fs p(p(p(W_3+W_3))) 5
+fs p(p(p(W_3+W_3)+W_2)) 5
+fs p(p(p(W_3+W_3)+p(W_3+W_3))) 5
+fs p(p(p(W_3+W_3+1))) 5
+fs p(p(p(W_3+W_3+W_2))) 5
+fs p(p(p(W_3+W_3+W_3))) 5
+fs p(p(p(p(W_4+1)))) 5
+fs p(p(p(p(W_4+W)))) 5
+fs p(p(p(p(W_4+W_2)))) 5
+fs p(p(p(p(W_4+W_3)))) 5
+fs p(p(p(p(W_4+W_4)))) 5
+fs p(p(p(p(p(W_5+1))))) 5
+fs p(p(p(p(p(W_5+W_4))))) 5
+fs p(p(p(p(p(W_5+W_5))))) 5
+fs p(p(p(p(p(p(W_6+1)))))) 5
+fs p(p(p(p(p(p(W_6+W_6)))))) 5
+fs W 5</textarea>
+        <!--<button id="abbr">Options</button>-->
+        <button id="calc" onclick="calculate()">Calculate</button>
+<br><br>
+    <div id="output" style="
+        resize:vertical;
+        display:block;
+        overflow:auto;
+        background-color:white;
+        border:1px solid #666;
+        border-radius: 2px;
+        font-size:14px;
+        padding:4px;
+        width:100%;
+        box-sizing:border-box;
+        height: 160px;
+        overflow-wrap:break-word;"></div>
+</body>
+<script src="HSPN.js"></script>
+</html>
