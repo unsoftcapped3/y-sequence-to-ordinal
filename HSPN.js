@@ -163,7 +163,7 @@ function executecommand(x){
 }
 
 function HTMLcommand(x){
-  if(x==''){return null;}
+  if(x==''){return '';}
   let c=x.split(' ')
   if(c[0]=='fs'){return `fs<br>${HTML(unabbreviate(c[1]))} ${c[2]}`;}
   if(c[0]=='lt'){return `lt ${HTML(unabbreviate(c[1]))} ${HTML(unabbreviate(c[2]))}`;}
