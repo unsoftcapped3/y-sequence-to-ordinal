@@ -128,13 +128,12 @@ function fs(x,n){ // n-th FS element of x
         while(1){
           j++;
           if(v[j]!='('){continue;}
-          else{
-            let k=v.slice(j-1,paren(v,j,false)+1);
-            if(lt(k,'W'.repeat(l))){break;}
-          }
+          let k=v.slice(j-1,paren(v,j,false)+1);
+          if(lt(k,'W'.repeat(l))){break;}
         }
       }
       let r=a+j-2;
+      if(r<1){n++;}
       o=x.slice(0,r)+z.slice(r).repeat(n);
     }
   }
