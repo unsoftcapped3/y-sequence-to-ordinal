@@ -77,6 +77,53 @@ function limit(s,n){return 'p('.repeat(n+1)+'W'.repeat(s+n)+'+'+'W'.repeat(s+n)+
 function fix(s){while(count(s)){s+=')';}return s;}
 function trim(s){while(s.at(-1)==')'){s=s.slice(0,-1);}return s;}
 
+function root(x,l){ // l-th order root of x
+  let b=x.length-1;
+  while(x[b]==')'){b--;}
+  if(x[b]=='0'){return undefined;}
+  let a=b;
+  while(x[a]!='+'&&x[a]!='('){a--;}
+  a++;
+  b++;
+  let i=b
+  let y=x.slice(a,b)
+  if(l==1){
+    while(1){
+      if(i==x.length){return undefined;}
+      let c=paren(x,i,false)
+      if(lt(x.slice(c-1,i+1),y)){return [i,x.slice(c-1,i+1)];}
+      i++;
+    }
+  }
+  const count=(x)=>(x.match(/\(/g)||[]).length-(x.match(/\)/g)||[]).length
+  let h=x.length-1;
+  while(x.at(h)!='W'){h--;}
+  let v=x.slice(0,root(x,l-1)[0]);
+  let z=count(v);
+  let q=root(x,l-1)[0]-root(x,l-1)[1].length+2; // bad root candidates
+  let w=q;
+  let c=root(x,l-1)[1]
+  i=root(x,l-1)[0]-root(x,l-1)[1].length+1;
+  //console.log(h)
+  while(1){
+    if(x[i]=='('){
+      let m=x.slice(0,i);
+      let t=count(m);
+      if(t<=z){
+        if(lt(fix(x.slice(i-1,h)),root(x,l-1)[1])){
+          break;
+        }
+        q=i;
+      }
+    }
+    i--;
+  }
+  q--;
+  let n=root(x,l-1)[0];
+  while(count(x.slice(q,n+1))>0){n++;}
+  return [n,x.slice(q,n+1)];
+}
+
 function fs(x,n){ // n-th FS element of x
   if(x=='0'){return x;}
   if(x.at(-1)=='W'){
@@ -121,18 +168,8 @@ function fs(x,n){ // n-th FS element of x
       o=z+limit(l,n);
     }
     else{
-      let i=0;
-      let j=1;
-      while(v[j]!='('){j++;}
-      for(let i=0;i<l-1;i++){
-        while(1){
-          j++;
-          if(v[j]!='('){continue;}
-          let k=v.slice(j-1,paren(v,j,false)+1);
-          if(lt(k,'W'.repeat(l))){break;}
-        }
-      }
-      let r=a+j-2;
+      console.log(x,l);
+      let r=root(y,l)[0]-root(y,l)[1].length+1;
       if(r<1){n++;}
       o=x.slice(0,r)+z.slice(r).repeat(n);
     }
@@ -187,3 +224,4 @@ function calculate(){
 }
 
 calculate();
+
