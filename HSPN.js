@@ -168,7 +168,6 @@ function fs(x,n){ // n-th FS element of x
       o=z+limit(l,n);
     }
     else{
-      console.log(x,l);
       let r=root(y,l)[0]-root(y,l)[1].length+1;
       if(r<1){n++;}
       o=x.slice(0,r)+z.slice(r).repeat(n);
