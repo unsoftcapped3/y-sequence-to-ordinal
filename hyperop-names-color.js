@@ -6,11 +6,17 @@ const TWO={pow:ZERO,coef:2,add:ZERO};
 const OMEGA={pow:ONE,coef:1,add:ZERO};
 const colors = [,'#0000ff','#00d800','#ff0000','#00c0ff','#e0d000','#800080','#6000ff'];
 let apos='’'
-apos+='​' // ZWSP
+apos+='​'
 function add(a,b){
   if(a===ZERO){return b;}
   if(a.add==ZERO){return {pow:a.pow,coef:a.coef,add:b};}
   else{return {pow:a.pow,coef:a.coef,add:add(a.add,b)};}
+}
+
+function lastTerm(a){
+  if(a===ZERO){return a;}
+  if(a.add===ZERO){return a;}
+  return lastTerm(a.add);
 }
 
 function colorize(x,c){
@@ -144,24 +150,27 @@ function toHTML(a,n=2){
 function name(a,t=0){
   if(typeof(a)!='object'){a=parseOrdinal(a.toString())[0];}
   let A=leftNF(a);
+  console.log(leftNF(a));
   let x='_'
-  for(let i=0;i<A.length-1;i++){
-    if(A[i][0]==1&&A[i][1]=='0'){delete A[i];}
-  }
   let m=0;
   let r=[];
   for(let i=0;i<A.length;i++){
-    if(!A[i]){continue;}
+    if(A[i][0].toString=='1,0'){continue;}
     let y='_'
     let l=''
     if(i+1==A.length||A[i][0]>1){
       let z=A.slice(i+1,-1).map(x=>(x[0])).every(x=>(x==1))?'':'`​'
+      if(A.length==1&&[2,3].includes(A[i][0])&&i+t==0){z='a'+z;}
       if(A[i][0]==2&&i+t==0){y=`di${z}_`;}
       else if(A[i][0]==3&&i+t==0){y=`tri${z}_`;}
       else{y=_add(prefix(A[i][0],i+t),'','a'+z)+'_'};
     }
     if(A[i][1]!=ZERO){y+=(i==A.length-2?'':'-')+name(A[i][1],i+t);}
-    if(i-m>1&&A.slice(0,i).some(x=>x[1]!=ZERO)&&!r.includes(m)){
+    console.log(i,m,r,toString(a))
+    let p=toString(A[i][1]).includes('ω')||(A[i][1]==0)
+    let q=false;
+    if(i>0){if(A[i-1][1]!=ZERO){q=true;}}
+    if(i!=A.length-1&&m<i&&p&&A[m][1]!=ZERO&&!r.includes(m)){
       r.push(m);
       if(m==0){y+=apos+'o';}
       if(m==1){y+=apos+'i';}
@@ -169,7 +178,7 @@ function name(a,t=0){
       if(m>2){y+=prefix(0,m).slice(0,28)+apos+prefix(0,m).slice(28,-8)+'k</span>';}
     }
     x=x.replace('_',y);
-    if(A[i][1]){m=i;}
+    if(toString(lastTerm(A[i][1]))!='0'){m=i;}
   }
   x=x.replace('_','');
   x=x.replaceAll(`a</span>${apos}o`,'</span>'+colorize('o',1));
