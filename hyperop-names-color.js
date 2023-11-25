@@ -170,10 +170,11 @@ function name(a,t=0){
     if(i>0){if(A[i-1][1]!=ZERO){q=true;}}
     if(i!=A.length-1&&m<i&&p&&A[m][1]!=ZERO&&!r.includes(m)){
       r.push(m);
-      if(m==0){y+=apos+'o';}
-      if(m==1){y+=apos+'i';}
-      if(m==2){y+=colorize(apos+'ok',3);}
-      if(m>2){y+=prefix(0,m).slice(0,28)+apos+prefix(0,m).slice(28,-8)+'k</span>';}
+      let _m=m+t;
+      if(_m==0){y+=apos+'o';}
+      if(_m==1){y+=apos+'i';}
+      if(_m==2){y+=colorize(apos+'ok',3);}
+      if(_m>2){y+=prefix(0,_m).slice(0,28)+apos+prefix(0,_m).slice(28,-8)+'k</span>';}
     }
     x=x.replace('_',y);
     if(toString(lastTerm(A[i][1]))!='0'){m=i;}
