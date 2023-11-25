@@ -174,7 +174,7 @@ function name(a,t=0){
       if(_m==0){y+=apos+'o';}
       if(_m==1){y+=apos+'i';}
       if(_m==2){y+=colorize(apos+'ok',3);}
-      if(_m>2){y+=prefix(0,_m).slice(0,28)+apos+prefix(0,_m).slice(28,-8)+'k</span>';}
+      if(_m>2){y+=colorize(apos+prefix(0,_m).slice(28,-8)+'k',(_m<5)?_m+1:7);}
     }
     x=x.replace('_',y);
     if(toString(lastTerm(A[i][1]))!='0'){m=i;}
