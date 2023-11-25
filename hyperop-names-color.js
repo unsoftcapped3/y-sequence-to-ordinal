@@ -180,9 +180,9 @@ function name(a,t=0){
 
 function hyperop(a){
   if(typeof(a)!='object'){a=parseOrdinal(a.toString())[0];}
-  if(a==ONE){return 'addition';}
-  if(a==TWO){return 'multiplication';}
-  if(a=={pow:0,coef:3,add:0}){return 'exponentiation';}
+  if(toString(a)=='1'){return 'addition';}
+  if(toString(a)=='2'){return 'multiplication';}
+  if(toString(a)=='3'){return 'exponentiation';}
   if(a.pow==ZERO){return prefix(parseInt(toString(a)),0)+'ation';}
   return name(a)+'tion';
 }
