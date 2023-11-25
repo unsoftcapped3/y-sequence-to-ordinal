@@ -128,7 +128,7 @@ function toString(a){
   return m;
 }
 
-function toHTML(a,n=3){
+function toHTML(a,n=2){
   if(!n){return toString(a);}
   if(a===ZERO){return '0';}
   if(a.pow===ZERO){return a.coef.toString();}
