@@ -137,7 +137,7 @@ function toHTML(a,n=2){
   if(a.pow===ONE){m='ω';}
   else{m=`ω<sup>${toHTML(a.pow,n-1)}</sup>`;}
   if(a.coef>1){m+=a.coef;}
-  if(a.add!=ZERO){m+='+'+toString(a.add);}
+  if(a.add!=ZERO){m+='+'+toHTML(a.add,n);}
   return m;
 }
 
