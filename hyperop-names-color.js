@@ -150,7 +150,6 @@ function toHTML(a,n=2){
 function name(a,t=0){
   if(typeof(a)!='object'){a=parseOrdinal(a.toString())[0];}
   let A=leftNF(a);
-  console.log(leftNF(a));
   let x='_'
   let m=0;
   let r=[];
@@ -166,7 +165,6 @@ function name(a,t=0){
       else{y=_add(prefix(A[i][0],i+t),'','a'+z)+'_'};
     }
     if(A[i][1]!=ZERO){y+=(i==A.length-2?'':'-')+name(A[i][1],i+t);}
-    console.log(i,m,r,toString(a))
     let p=toString(A[i][1]).includes('ω')||(A[i][1]==0)
     let q=false;
     if(i>0){if(A[i-1][1]!=ZERO){q=true;}}
