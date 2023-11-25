@@ -4,8 +4,9 @@ const ZERO=0;
 const ONE={pow:ZERO,coef:1,add:ZERO};
 const TWO={pow:ZERO,coef:2,add:ZERO};
 const OMEGA={pow:ONE,coef:1,add:ZERO};
-const colors = [,'#0000ff','#00d800','#ff0000','#00c0ff','#e0d000','#d000d0','#6000ff'];
+const colors = [,'#0000ff','#00d800','#ff0000','#00c0ff','#e0d000','#800080','#6000ff'];
 let apos='’'
+apos+='​' // ZWSP
 function add(a,b){
   if(a===ZERO){return b;}
   if(a.add==ZERO){return {pow:a.pow,coef:a.coef,add:b};}
@@ -128,7 +129,7 @@ function toString(a){
   return m;
 }
 
-function toHTML(a,n=2){
+function toHTML(a,n=3){
   if(!n){return toString(a);}
   if(a===ZERO){return '0';}
   if(a.pow===ZERO){return a.coef.toString();}
@@ -154,7 +155,7 @@ function name(a,t=0){
     let y='_'
     let l=''
     if(i+1==A.length||A[i][0]>1){
-      let z=A.slice(i+1,-1).map(x=>(x[0])).every(x=>(x==1))?'':'`'
+      let z=A.slice(i+1,-1).map(x=>(x[0])).every(x=>(x==1))?'':'`​'
       if(A[i][0]==2&&i+t==0){y=`di${z}_`;}
       else if(A[i][0]==3&&i+t==0){y=`tri${z}_`;}
       else{y=_add(prefix(A[i][0],i+t),'','a'+z)+'_'};
