@@ -75,8 +75,8 @@ function g(x){
         }
       }
     }
-    console.log(p)
-    console.log(' ')
+    //console.log(p)
+    //console.log(' ')
     let col=['#0ee','#0aa','#077']
     //console.log(p,[...p.keys()].toReversed().slice(0,-1))
     for(i of [...p.keys()].toReversed().slice(0,-1)){for(j of [...Array(p[i]+1).keys()].slice(h(p[i])[1])){if(j>x||j<h(x)[1]){spans(j).setAttribute('style',`color:${col[i-1]}`);}}}
