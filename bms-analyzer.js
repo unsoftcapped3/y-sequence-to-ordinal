@@ -66,8 +66,17 @@ function exp(a){
 function log(a){
   if(iz(a)){return [];}
   let [p,q]=s(a[1],[suc(a[0]),[],[]]);
-  if(iz(a[0])&&iz(p)){return q;}
-  return add([a[0],p,[]],q);
+  if(iz(a[0])&&iz(p)){
+    if(!lt(a[1],[[],[ONE,[],[]],[]])){
+      if(eq(log(q),q)&&iz(q[2])&&lt(a[1],[ONE,[],[]])){return [a[0],a[1],[]];}
+    }
+    return q;
+  }
+  let m=add([a[0],p,[]],q);
+  if(!lt(a[1],[a[0],[suc(a[0]),[],[]],[]])){
+    if(eq(log(a[1]),a[1])&&iz(a[2])&&lt(a[1],[suc(a[0]),[],[]])){return [a[0],a[1],[]];}
+  }
+  return m;
 }
 
 function P(M,r,n){
@@ -81,6 +90,14 @@ function C(M,n){
   let X=[];
   for(let i=0;i<M.length;i++){
     if(P(M,0,i)==n){X.push(i);}
+  }
+  return X;
+}
+
+function D(M,n){
+  let X=0;
+  for(let i=0;i<M.length;i++){
+    if(P(M,0,i)==n&&M[i][1]>0){X++;}
   }
   return X;
 }
@@ -108,7 +125,7 @@ function v(M,n){
   for(i of C(M,n)){
     if(!eq(M[i],[M[n][0]+1,M[n][1],1])){continue;}
     let q=[];
-    for(j of C(M,i)){q=add(q,exp(o(M,j)));}
+    for(j of C(M,i)){q=add(q,o(M,j));}
     p=add(p,exp(q));
   }
   return add(v(M,P(M,1,n)),exp(p));
@@ -158,27 +175,55 @@ function sf(a){
 
 function createTable(X){return X.map(x=>'<tr>'+x.map(y=>'<td>'+y+'</td>').join('')+'</tr>').join('');}
 
-function toString(a){
-  if(iz(a)){return '0';}
-  if(iz(a[0])&&iz(a[1])){return (eval(toString(a[2]))+1).toString();}
+function toString(q){
+  if(iz(q)){return '0';}
+  if(iz(q[0])&&iz(q[1])){return (eval(toString(q[2]))+1).toString();}
+  let [a,b]=s(q,[q[0],q[1],[]]);
   let m=`ψ<sub>${toString(a[0])}</sub>(${toString(a[1])})`;
   if(iz(a[1])){m=`Ω<sub>${toString(a[0])}</sub>`;}
   if(iz(a[1])&&eq(a[0],ONE)){m=`Ω`;}
   if(iz(a[0])){m=`ψ(${toString(a[1])})`}
   if(eq(a[0],[])&&eq(a[1],ONE)){m='ω';}
   else if(!eq(log([a[0],a[1],[]]),[a[0],a[1],[]])){m=`ω<sup>${toString(log(a))}</sup>`;}
-  if(!iz(a[2])){m+=`+${toString(a[2])}`;}
+//  else if(!le(l(a[1]),[suc(a[0]),[],[]])&&le(l(a[1]),[suc(a[0]),[suc(a[0]),[],[]],[]])){
+//    let [f,g]=s(a[1],[suc(a[0]),[suc(a[0]),[],[]],[]]);
+//  }
+  function getCoef(x){
+    if(iz(x[2])){return 1;}
+    return getCoef(x[2])+1;
+  }
+  if(getCoef(a)>1){m+=getCoef(a);}
+  if(!iz(b)){m+=`+${toString(b)}`;}
   return m;
 }
 
 function calculate(){
   let M=document.getElementById('input').value;
-  try{M=eval('[['+M.slice(1,-1).replaceAll(')(','],[')+']]');}
+  try{M=eval('['+M.replaceAll(')(','],[').replaceAll('(','[').replaceAll(')',']')+']');}
   catch(e){return;}
   M=M.map(x=>{let y=x.slice();while(y.length<3){y.push(0)}return y;});
+  let A=[...Array(M.length).keys()].map(x=>D(M,x));
+  if(Math.max(...A)>15){
+    document.getElementById('output').innerHTML='Too complex';
+    document.getElementById('output3').innerHTML='';
+    let Q='<tr><th class="border">i</th><th class="border" colspan=3>M<sub>i</sub></th><th class="border">o(M,i)</th><th class="border">v(M,i)</th><th class="border">U(M,i)</th><th class="border">Children</th>';
+    for(let i=0;i<M.length;i++){
+      Q+='<tr>';
+      let m=[i.toString(),'('+M[i][0]+',',M[i][1]+',',M[i][2]+')','?','?','?','?'];
+      for(let j=0;j<m.length;j++){
+        if(j==1||j==2||j==3){Q+='<td class="nborder">';}
+        else{Q+='<td class="border">';}
+        Q+=`${m[j]}</td>`;
+      }
+      Q+='</tr>';
+    }
+    Q+=`<tr><td>Σ</td><td colspan=7>?</td></tr>`;
+    document.getElementById('output2').innerHTML=Q;
+    return;
+  }
   document.getElementById('output').innerHTML=toString(_o(M));
   document.getElementById('output3').innerHTML=(eq(NS(M),_o(M))?'':'<i>n.s.</i> '+toString(NS(M)));
-  let Q='<tr><th class="border">#</th><th class="border" colspan=3>Column</th><th class="border">o(M,i)</th><th class="border">v(M,i)</th><th class="border">U(M,i)</th><th class="border">Children</th>';
+  let Q='<tr><th class="border">i</th><th class="border" colspan=3>M<sub>i</sub></th><th class="border">o(M,i)</th><th class="border">v(M,i)</th><th class="border">U(M,i)</th><th class="border">Children</th>';
   let u=[...Array(M.length).keys()].map(x=>U(M,x));
   for(let i=0;i<M.length;i++){
     Q+='\n';
@@ -193,7 +238,7 @@ function calculate(){
     }
     else if(M[i][2]==1&&eq(M[P(M,0,i)],[M[i][0]-1,M[i][1],1])){Q+='<tr style="color:#bbb;">';}
     else{Q+='<tr>'}
-    let m=[i.toString(),'('+M[i][0]+',',M[i][1]+',',M[i][2]+')',toString(o(M,i)),toString(v(M,i)),(U(M,i)!=-1?U(M,i).toString():'-'),(C(M,i).length!=0?C(M,i):'-')];
+    let m=[i.toString(),'('+M[i][0]+',',M[i][1]+',',M[i][2]+')',toString(o(M,i)),toString(v(M,i)),(U(M,i)!=-1?U(M,i).toString():'-'),C(M,i)];
     for(let j=0;j<m.length;j++){
       if(j==1||j==2||j==3){Q+='<td class="nborder">';}
       else{Q+='<td class="border">';}
@@ -204,5 +249,5 @@ function calculate(){
   Q+=`<tr><td>Σ</td><td colspan=7>${toString(NS(M))}</td></tr>`;
   document.getElementById('output2').innerHTML=Q;
 }
-document.getElementById('input').value='(0)(1,1,1)(2,1,1)(3,1)(1,1,1)(2,1,1)(3,1)(1,1)(2,2,1)(3,2,1)(4,2)(2,2,1)(3,2,1)(4,1)(3,2)(4,3,1)(5,3,1)(6,3)';
+document.getElementById('input').value='(0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,2,0)(2,2,0)(3,3,1)(4,3,1)(5,3,0)(3,3,1)(4,3,1)(5,3,0)(3,3,0)(4,4,1)(5,4,1)(6,4,0)(4,4,1)(5,4,1)(6,3,0)(5,4,0)(6,5,1)(7,5,1)(8,5,0)(6,5,0)(7,6,1)(8,6,1)(9,6,0)(7,6,0)(8,7,1)(9,7,1)(10,6,0)(9,7,0)(10,8,0)';
 calculate();
