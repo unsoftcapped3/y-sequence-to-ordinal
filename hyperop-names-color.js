@@ -100,7 +100,7 @@ function prefix(n,m){
     else{v=X[n%10].slice(0,-1)+Y[Math.floor(n/10)];}
   }
   else{
-    //m--;
+    m--;
     let X=['','hep','ott','net','det','unt','ent','fit','syt','bront'];
     let Y=['','gep','am','hap','kir','pij','sag','pec','nis','zot']
     if(m<10){v=X[m];}
