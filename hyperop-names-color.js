@@ -200,9 +200,9 @@ function hyperop_(a){
   return x;
 }
 
-//function calculate(){
-//  document.getElementById('output2').innerHTML=`[${toHTML(parseOrdinal(document.getElementById('input').value)[0])}] is called`
-//  document.getElementById('output').innerHTML=hyperop_(document.getElementById('input').value);
-//}
-//document.getElementById('input').value='w^w^(w+1)+1'
-//calculate();
+function calculate(){
+ document.getElementById('output2').innerHTML=`[${toHTML(parseOrdinal(document.getElementById('input').value)[0])}] is called`
+ document.getElementById('output').innerHTML=hyperop_(document.getElementById('input').value);
+}
+document.getElementById('input').value='w^w^(w+1)+1'
+calculate();
