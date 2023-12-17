@@ -100,6 +100,7 @@ function prefix(n,m){
     else{v=X[n%10].slice(0,-1)+Y[Math.floor(n/10)];}
   }
   else{
+    m--;
     let X=['','hep','ott','net','det','unt','ent','fit','syt','bront'];
     let Y=['','gep','am','hap','kir','pij','sag','pec','nis','zot']
     if(m<10){v=X[m];}
@@ -174,7 +175,7 @@ function name(a,t=0){
       if(_m==0){y+=apos+'o';}
       if(_m==1){y+=apos+'i';}
       if(_m==2){y+=colorize(apos+'ok',3);}
-      if(_m>2){y+=colorize(apos+prefix(0,_m).slice(28,-8)+'k',(_m<5)?_m+1:7);}
+      if(_m>2){y+=colorize(apos+prefix(0,_m+1).slice(28,-8)+'k',(_m<5)?_m+1:7);}
     }
     x=x.replace('_',y);
     if(toString(lastTerm(A[i][1]))!='0'){m=i;}
@@ -182,8 +183,6 @@ function name(a,t=0){
   x=x.replace('_','');
   x=x.replaceAll(`a</span>${apos}o`,'</span>'+colorize('o',1));
   x=x.replaceAll(`a</span>${apos}i`,'</span>'+colorize('i',2));
-  x=x.replaceAll(/a<span style="color:#[0-9a-f]{6}">a/g,x=>x.slice(1));
-  x=x.replaceAll(/a<\/span><span style="color:#[0-9a-f]{6}">a/g,x=>x.slice(8));
   return x;
 }
 
