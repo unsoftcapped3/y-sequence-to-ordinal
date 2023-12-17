@@ -100,7 +100,7 @@ function prefix(n,m){
     else{v=X[n%10].slice(0,-1)+Y[Math.floor(n/10)];}
   }
   else{
-    m--;
+    //m--;
     let X=['','hep','ott','net','det','unt','ent','fit','syt','bront'];
     let Y=['','gep','am','hap','kir','pij','sag','pec','nis','zot']
     if(m<10){v=X[m];}
@@ -110,7 +110,7 @@ function prefix(n,m){
     else{v=X[m%10].slice(0,-1)+Y[Math.floor(m/10)];}
     if(n>1){w=prefix(n,1).slice(28,-7)+(m%10==6?'i':'e');}
   }
-  if(m<6){o=colorize(w+v,m);}
+  if(m<5){o=colorize(w+v,m+1);}
   else if(m>=6&&w){o=colorize(w,6)+colorize(v,7);}
   else{o=colorize(v,7);}
   return o;
@@ -175,7 +175,7 @@ function name(a,t=0){
       if(_m==0){y+=apos+'o';}
       if(_m==1){y+=apos+'i';}
       if(_m==2){y+=colorize(apos+'ok',3);}
-      if(_m>2){y+=colorize(apos+prefix(0,_m+1).slice(28,-8)+'k',(_m<5)?_m+1:7);}
+      if(_m>2){y+=colorize(apos+prefix(0,_m).slice(28,-8)+'k',(_m<5)?_m+1:7);}
     }
     x=x.replace('_',y);
     if(toString(lastTerm(A[i][1]))!='0'){m=i;}
@@ -200,9 +200,9 @@ function hyperop_(a){
   return x;
 }
 
-function calculate(){
- document.getElementById('output2').innerHTML=`[${toHTML(parseOrdinal(document.getElementById('input').value)[0])}] is called`
- document.getElementById('output').innerHTML=hyperop_(document.getElementById('input').value);
-}
-document.getElementById('input').value='w^w^(w+1)+1'
-calculate();
+//function calculate(){
+//  document.getElementById('output2').innerHTML=`[${toHTML(parseOrdinal(document.getElementById('input').value)[0])}] is called`
+//  document.getElementById('output').innerHTML=hyperop_(document.getElementById('input').value);
+//}
+//document.getElementById('input').value='w^w^(w+1)+1'
+//calculate();
