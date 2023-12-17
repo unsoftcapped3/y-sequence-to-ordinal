@@ -104,7 +104,7 @@ function prefix(n,m){
     let Y=['','gep','am','hap','kir','pij','sag','pec','nis','zot']
     if(m<10){v=X[m];}
     else if(m==22){v='otam';}
-    else if(m%10==2){v='o'+X[Math.floor(m/10)];}
+    else if(m%10==2){v='o'+Y[Math.floor(m/10)];}
     else if(m>19&&m<30){v=X[m%10]+'am';}
     else{v=X[m%10].slice(0,-1)+Y[Math.floor(m/10)];}
     if(n>1){w=prefix(n,1).slice(28,-7)+(m%10==6?'i':'e');}
@@ -201,9 +201,9 @@ function hyperop_(a){
   return x;
 }
 
-function calculate(){
-  document.getElementById('output2').innerHTML=`[${toHTML(parseOrdinal(document.getElementById('input').value)[0])}] is called`
-  document.getElementById('output').innerHTML=hyperop_(document.getElementById('input').value);
-}
-document.getElementById('input').value='w^w^(w+1)+1'
-calculate();
+//function calculate(){
+//  document.getElementById('output2').innerHTML=`[${toHTML(parseOrdinal(document.getElementById('input').value)[0])}] is called`
+//  document.getElementById('output').innerHTML=hyperop_(document.getElementById('input').value);
+//}
+//document.getElementById('input').value='w^w^(w+1)+1'
+//calculate();
