@@ -148,7 +148,7 @@ function toHTML(a,n=2){
   return m;
 }
 
-function getPrefix(_m){
+function suffix(_m){
   if(_m==0){return colorize('o',1);}
   if(_m==1){return colorize('ik',2);}
   if(_m==2){return colorize('ihek',3);}
@@ -186,7 +186,7 @@ function name(a,t=0){
     if(toString(lastTerm(A[i][1]))!='0'){m=i;}
   }
   x=x.replace('_','');
-  x=x.replaceAll(/a<\/span>\[\d+]/g,x=>'</span>'+getPrefix(Number(x.slice(9,-1))))
+  x=x.replaceAll(/a<\/span>\[\d+]/g,x=>'</span>'+suffix(Number(x.slice(9,-1))))
   return x;
 }
 
