@@ -4,9 +4,9 @@ const ZERO=0;
 const ONE={pow:ZERO,coef:1,add:ZERO};
 const TWO={pow:ZERO,coef:2,add:ZERO};
 const OMEGA={pow:ONE,coef:1,add:ZERO};
-const colors = [,'#0000ff','#00d800','#ff0000','#00c0ff','#e0d000','#800080','#6000ff'];
-let apos='’'
-apos+='​'
+const colors = [,'#0000ff','#00d800','#ff0000','#00c0ff','#e0d000','#ff00ff','#8000ff','#7800c0'];
+//let apos='’'
+//apos+='​'
 function add(a,b){
   if(a===ZERO){return b;}
   if(a.add==ZERO){return {pow:a.pow,coef:a.coef,add:b};}
@@ -148,6 +148,14 @@ function toHTML(a,n=2){
   return m;
 }
 
+function getPrefix(_m){
+  if(_m==0){return colorize('o',1);}
+  if(_m==1){return colorize('ik',2);}
+  if(_m==2){return colorize('ihek',3);}
+  if(_m==3){return colorize('ok',4);}
+  if(_m>3){return colorize('i'+prefix(0,_m).slice(28,-8)+'k',(_m<5)?_m+1:8);}
+}
+
 function name(a,t=0){
   if(typeof(a)!='object'){a=parseOrdinal(a.toString())[0];}
   let A=leftNF(a);
@@ -172,17 +180,13 @@ function name(a,t=0){
     if(i!=A.length-1&&m<i&&p&&A[m][1]!=ZERO&&!r.includes(m)){
       r.push(m);
       let _m=m+t;
-      if(_m==0){y+=apos+'o';}
-      if(_m==1){y+=apos+'i';}
-      if(_m==2){y+=colorize(apos+'ok',3);}
-      if(_m>2){y+=colorize(apos+prefix(0,_m).slice(28,-8)+'k',(_m<5)?_m+1:7);}
+      y+='['+_m+']'
     }
     x=x.replace('_',y);
     if(toString(lastTerm(A[i][1]))!='0'){m=i;}
   }
   x=x.replace('_','');
-  x=x.replaceAll(`a</span>${apos}o`,'</span>'+colorize('o',1));
-  x=x.replaceAll(`a</span>${apos}i`,'</span>'+colorize('i',2));
+  x=x.replaceAll(/a<\/span>\[\d+]/g,x=>'</span>'+getPrefix(Number(x.slice(9,-1))))
   return x;
 }
 
@@ -201,8 +205,8 @@ function hyperop_(a){
 }
 
 function calculate(){
- document.getElementById('output2').innerHTML=`[${toHTML(parseOrdinal(document.getElementById('input').value)[0])}] is called`
- document.getElementById('output').innerHTML=hyperop_(document.getElementById('input').value);
+  document.getElementById('output2').innerHTML=`[${toHTML(parseOrdinal(document.getElementById('input').value)[0])}] is called`
+  document.getElementById('output').innerHTML=hyperop_(document.getElementById('input').value);
 }
 document.getElementById('input').value='w^w^(w+1)+1'
 calculate();
