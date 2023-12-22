@@ -93,6 +93,7 @@ function prefix(n,m){
     return X[n%10]+(((n>10&&n<20)||(n>29&&n%10>0))?'a':'')+Y[Math.floor(n/10)];
   }
   if(m==1){
+    m--;
     let X=['','kal','mej','gij','ast','lun','ferm','jov','sol','bet','gloc','gax','sup','vers','mult','met','xev','hyp','omniv','out'];
     let Y=['','','barr','gic','asc','luc','ferc','joc','solc','bec'];
     if(n<20){v=X[n];}
