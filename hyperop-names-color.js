@@ -5,8 +5,8 @@ const ONE={pow:ZERO,coef:1,add:ZERO};
 const TWO={pow:ZERO,coef:2,add:ZERO};
 const OMEGA={pow:ONE,coef:1,add:ZERO};
 const colors = [,'#0000ff','#00d800','#ff0000','#00c0ff','#e0d000','#ff00ff','#8000ff','#7800c0'];
-//let apos='’'
-//apos+='​'
+let apos='’'
+apos+='​'
 function add(a,b){
   if(a===ZERO){return b;}
   if(a.add==ZERO){return {pow:a.pow,coef:a.coef,add:b};}
@@ -168,7 +168,7 @@ function name(a,t=0){
     let y='_'
     let l=''
     if(i+1==A.length||A[i][0]>1){
-      let z=A.slice(i+1,-1).map(x=>(x[0])).every(x=>(x==1))?'':'`​'
+      let z=A.slice(i+1,-1).map(x=>(x[0])).every(x=>(x==1))?'':apos
       if(A.length==1&&[2,3].includes(A[i][0])&&i+t==0){z='a'+z;}
       if(A[i][0]==2&&i+t==0){y=`di${z}_`;}
       else if(A[i][0]==3&&i+t==0){y=`tri${z}_`;}
