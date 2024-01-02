@@ -49,8 +49,8 @@ function genIncr10(n){
 function doLayer1(){
   stuff+=layer1Unlocked+1+Math.floor(Math.sqrt(Math.log10(ord[0])-10-layer1Unlocked));
   layer1Unlocked++;
-  let i=0;
-  let c=setInterval(()=>{gens=[0,0,0,0,0,0,0,0];i++;if(i>=10){clearInterval(c);}},50);
+  let i=7;
+  let c=setInterval(()=>{for(let j=7;j>=0;j--){gens[j]=0;}i++;if(i>=10){clearInterval(c);}},50);
   i=0;
   d=setInterval(()=>{ord=[0];i++;if(i>=10){clearInterval(d);}},50);
 }
@@ -96,8 +96,9 @@ let update=setInterval(()=>{
                                document.getElementById('unlock-layer-1').style.display='none';
                              }
                              else{
-                               if(layer1Unlocked){document.getElementById('unlock-layer-1').innerHTML=`Sacrifice everything for ${displayOrd(layer1Unlocked+1+Math.floor(Math.sqrt(Math.log10(ord[0])-10-layer1Unlocked)))} somethings`;}
-                               else{document.getElementById('unlock-layer-1').innerHTML=`Sacrifice everything for ${displayOrd(layer1Unlocked+1+Math.floor(Math.sqrt(Math.log10(ord[0])-10-layer1Unlocked)))} `+obsfucate('something');}
+                               let t=displayOrd(layer1Unlocked+1+Math.floor(Math.sqrt(Math.log10(ord[0])-10-layer1Unlocked)));
+                               if(layer1Unlocked){document.getElementById('unlock-layer-1').innerHTML=`Sacrifice everything for ${t} booster`+(t=='1'?'':'s');}
+                               else{document.getElementById('unlock-layer-1').innerHTML=`Sacrifice everything for ${t}`+obsfucate('booster'+(t=='1'?'':'s'));}
                                document.getElementById('unlock-layer-1').style.display='inline';
                              }
 
@@ -111,7 +112,7 @@ let update=setInterval(()=>{
                                document.getElementById('l0-1').style.display='none';
                                document.getElementById('l1-0').style.display='inline';
                                document.getElementById('l1-1').style.display='inline';
-                               for(let i=1;i<9;i++){document.getElementById(`l1-t${i}-n`).innerHTML=displayOrd((i+1)**stuff);}
+                               for(let i=1;i<9;i++){document.getElementById(`l1-t${i}-n`).innerHTML=displayOrd(Math.round((i+1)**stuff**i**-1));}
                                document.getElementById('l1-2').style.display='inline';
                              }
 
@@ -120,42 +121,42 @@ let update=setInterval(()=>{
 
                              if(oldgens[0]!=gens[0]){
                                clearInterval(gen0);
-                               gen0_=gens[0]*2**stuff;
+                               gen0_=Math.round(gens[0]*2**stuff**1);
                                gen0=setInterval(()=>{ord[0]+=gen0_>50?Math.round(gen0_/50):1;},gen0_>0?(gen0_>=50?20:1000/gen0_):1e20);
                              }
                              if(oldgens[1]!=gens[1]){
                                clearInterval(gen1);
-                               gen1_=gens[1]*3**stuff;
+                               gen1_=Math.round(gens[0]*3**stuff**2**-1);
                                gen1=setInterval(()=>{gens[0]+=gen1_>50?Math.round(gen1_/50):1;},gen1_>0?(gen1_>=50?20:1000/gen1_):1e20);
                              }
                              if(oldgens[2]!=gens[2]){
                                clearInterval(gen2);
-                               gen2_=gens[2]*4**stuff;
+                               gen2_=Math.round(gens[0]*4**stuff**3**-1);
                                gen2=setInterval(()=>{gens[1]+=gen2_>50?Math.round(gen2_/50):1;},gen2_>0?(gen2_>=50?20:1000/gen2_):1e20);
                              }
                              if(oldgens[3]!=gens[3]){
                                clearInterval(gen3);
-                               gen3_=gens[3]*5**stuff;
+                               gen3_=Math.round(gens[0]*5**stuff**4**-1);
                                gen3=setInterval(()=>{gens[2]+=gen3_>50?Math.round(gen3_/50):1;},gen3_>0?(gen3_>=50?20:1000/gen3_):1e20);
                              }
                              if(oldgens[4]!=gens[4]){
                                clearInterval(gen4);
-                               gen4_=gens[4]*6**stuff;
+                               gen4_=Math.round(gens[0]*6**stuff**5**-1);
                                gen4=setInterval(()=>{gens[3]+=gen4_>50?Math.round(gen4_/50):1;},gen4_>0?(gen4_>=50?20:1000/gen4_):1e20);
                              }
                              if(oldgens[5]!=gens[5]){
                                clearInterval(gen5);
-                               gen5_=gens[5]*7**stuff;
+                               gen5_=Math.round(gens[0]*7**stuff**6**-1);
                                gen5=setInterval(()=>{gens[4]+=gen5_>50?Math.round(gen5_/50):1;},gen5_>0?(gen5_>=50?20:1000/gen5_):1e20);
                              }
                              if(oldgens[6]!=gens[6]){
                                clearInterval(gen6);
-                               gen6_=gens[6]*8**stuff;
+                               gen6_=Math.round(gens[0]*8**stuff**7**-1);
                                gen6=setInterval(()=>{gens[5]+=gen6_>50?Math.round(gen6_/50):1;},gen6_>0?(gen6_>=50?20:1000/gen6_):1e20);
                              }
                              if(oldgens[7]!=gens[7]){
                                clearInterval(gen7);
-                               gen7_=gens[7]*9**stuff;
+                               gen7_=Math.round(gens[0]*9**stuff**8**-1);
                                gen7=setInterval(()=>{gens[6]+=gen7_>50?Math.round(gen7_/50):1;},gen7_>0?(gen7_>=50?20:1000/gen7_):1e20);
                              }
                              oldgens=gens.slice()
