@@ -175,9 +175,9 @@ function name(a,t=0){
       else{y=_add(prefix(A[i][0],i+t),'','a'+z)+'_'};
     }
     if(A[i][1]!=ZERO){y+=(i==A.length-2?'':'-')+name(A[i][1],i+t);}
-    let p=toString(A[i][1]).includes('ω')||(A[i][1]==0)
-    let q=false;
-    if(i>0){if(A[i-1][1]!=ZERO){q=true;}}
+    let p=toString(lastTerm(A[i][1])).includes('ω')||(A[i][1]==0)
+//    let q=false;
+//    if(i>0){if(A[i-1][1]!=ZERO){q=true;}}
     if(i!=A.length-1&&m<i&&p&&A[m][1]!=ZERO&&!r.includes(m)){
       r.push(m);
       let _m=m+t;
