@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cOCF implementation</title>
+</head>
+<body>
+    <h1>cOCF</h1>
+    <!--Use W(a,b) or Ω(a,b) for Ω<sup>a</sup>&sdot;b.-->
+        <textarea id="input" style="resize:vertical;width:calc(100% - 8px);height:80px;text-align:left;">
+</textarea>
+        <!--<button id="abbr">Options</button>-->
+        <button id="calc" onclick="calculate()">Calculate</button>
+<br><br>
+    <div id="output" style="
+        resize:vertical;
+        display:block;
+        overflow:auto;
+        background-color:white;
+        border:1px solid #666;
+        border-radius: 2px;
+        font-size:14px;
+        padding:4px;
+        width:100%;
+        box-sizing:border-box;
+        height: 160px;
+        overflow-wrap:break-word;"></div>
+</body>
+<script src="cOCF.js"></script>
+</html>
