@@ -6,10 +6,8 @@
 </head>
 <body>
     <h1>cOCF</h1>
-    <!--Use W(a,b) or Ω(a,b) for Ω<sup>a</sup>&sdot;b.-->
         <textarea id="input" style="resize:vertical;width:calc(100% - 8px);height:80px;text-align:left;">
 </textarea>
-        <!--<button id="abbr">Options</button>-->
         <button id="calc" onclick="calculate()">Calculate</button>
 <br><br>
     <div id="output" style="
@@ -25,6 +23,19 @@
         box-sizing:border-box;
         height: 160px;
         overflow-wrap:break-word;"></div>
+    <h3>Abbreviations</h3>
+    <table>
+        <tr><td>1</td><td>=</td><td>ψ(0)</td></tr>
+        <tr><td><i>n</i></td><td>=</td><td>ψ(0)+ψ(0)+...+ψ(0) w/ <i>n</i></td></tr>
+        <tr><td>ω</td><td>=</td><td>ψ(1)</td></tr>
+        <tr><td>c</td><td>=</td><td>ψ<sub>1</sub>(0)</td></tr>
+        <tr><td>Ω</td><td>=</td><td>ψ(c)</td></tr>
+        <tr><td>I</td><td>=</td><td>ψ(Ω<sub>L+1</sub>)</td></tr>
+        <tr><td>L</td><td>=</td><td>ψ(c<sup>2</sup>)</td></tr>
+        <tr><td>R</td><td>=</td><td>ψ(c<sup>3</sup>)</td></tr>
+        <tr><td>J</td><td>=</td><td>ψ(c<sup>c</sup>)</td></tr>
+        <tr><td>d</td><td>=</td><td>Ω<sub>L+1</sub> = ψ(c<sup>2</sup>+c)</td></tr>
+    </table>
 </body>
-<script src="cOCF.js"></script>
+<script src="XOCF.js"></script>
 </html>
