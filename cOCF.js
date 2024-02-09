@@ -3,7 +3,9 @@ const count=(x)=>(x.match(/\(/g)||[]).length-(x.match(/\)/g)||[]).length;
 function unabbreviate(x){ // removes sugar
   let y=x;
   y=y.replaceAll('_','');
+  y=y.replaceAll('x','χ')
   y=y.replaceAll('ψ1','P');
+  y=y.replaceAll('χ','P');
   y=y.replaceAll('ψ','psi');
   y=y.replaceAll('c','P(0)');
   y=y.replaceAll('W','Ω');
@@ -36,13 +38,13 @@ function abbreviate(x){
   x=x.replaceAll('p(P(P(0))+P(0))','d');
   x=x.replaceAll('p(P(P(P(0))))','J');
   x=x.replaceAll('P(0)','c');
-  x=x.replaceAll('P','ψ1');
+  x=x.replaceAll('P','χ');
   x=x.replaceAll('p','ψ');
   return x;
 }
 
 function HTML(x){
-  return abbreviate(x).replaceAll('ψ1','ψ<sub>1</sub>');
+  return abbreviate(x);
 }
 
 function paren(x,n){
